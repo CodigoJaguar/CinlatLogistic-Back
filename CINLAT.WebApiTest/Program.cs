@@ -30,6 +30,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 //builder.WebHost.UseUrls("http://*:5025");
+builder.Services.AddAuthentication();
 
 var app = builder.Build();
 
@@ -41,7 +42,7 @@ var app = builder.Build();
 app.MapOpenApi();
 app.MapScalarApiReference();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 
 app.UseCors("AllowAllOrigins");

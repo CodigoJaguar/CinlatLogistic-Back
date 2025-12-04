@@ -1,4 +1,5 @@
-﻿using CINLAT.WebApiTest.Application.Interfaces;
+﻿using CINLAT.WebApiTest.Application.Core;
+using CINLAT.WebApiTest.Application.Interfaces;
 using CINLAT.WebApiTest.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,10 +32,10 @@ namespace CINLAT.WebApiTest.Infrastructure.Security
                 WHERE a.Username = {username}
             ").ToListAsync();
 
-            //listaDeRutas = Routes.GetRoutes(policies);
-            if (policies.Count > 0) return listaDeRutas;
+            listaDeRutas = Routes.GetRoutes(policies);
+            //if (policies.Count > 0) return listaDeRutas;
 
-            return policies;
+            return listaDeRutas;
         }
 
         public async Task<List<string>> GetSectionPermissions(string username)

@@ -28,7 +28,7 @@ namespace CINLAT.WebApiTest.Application.InfrastructureCQRS.Country.Handlers
         public async Task<Result<List<CountryAreasResponse>>> Handle(CountryAreasGetQueryRequest request, CancellationToken cancellationToken)
         {
             IQueryable<Pais> queryable = _context.Paises!;
-            List<CountryAreasResponse> listaTotal = queryable.Select(x => new CountryAreasResponse { commonName = x.commonName, area = x.area }).ToList();
+            List<CountryAreasResponse> listaTotal = queryable.Where(x => x.area > 2000000).Select(x => new CountryAreasResponse { commonName = x.commonName, area = x.area }).ToList();
 
             return Result<List<CountryAreasResponse>>.Success(listaTotal);
 
