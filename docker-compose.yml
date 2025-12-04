@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  ## WebAPI Security
+  cinlatlogistic-back-service:
+    image: cinlatlogistic-back
+    container_name: CinlatLogistic-Back
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5025
+      - ConnectionStrings__SqliDatabase=Data Source=LocalCinlatDatabase.db;
+    ports:
+      - "5000:5025"
+    restart: unless-stopped
+    networks:
+      - cinlatlogistic-network
+      
+  # Frontend Angular
+  cinlatlogistic-front-service:
+    image: cinlatlogistic-front
+    container_name: CinlatLogistic-Front
+    environment:
+      - API_URL=http://cinlatlogistic-back-service:5025
+    depends_on:
+      - cinlatlogistic-back-service
+    ports:
+      - "4200:80"
+    restart: unless-stopped
+    networks:
+      - cinlatlogistic-network
+
+volumes:
+  cinlatlogistic-volume:
+    name: cinlatlogistic-volume
+    driver: local 
+
+networks:
+  cinlatlogistic-network:
+    name: cinlatlogistic-network
+    driver: bridge
+

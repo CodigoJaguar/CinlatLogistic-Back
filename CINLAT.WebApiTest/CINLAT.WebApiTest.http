@@ -1,0 +1,6 @@
+@CINLAT.WebApiTest_HostAddress = http://localhost:5278
+
+GET {{CINLAT.WebApiTest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
